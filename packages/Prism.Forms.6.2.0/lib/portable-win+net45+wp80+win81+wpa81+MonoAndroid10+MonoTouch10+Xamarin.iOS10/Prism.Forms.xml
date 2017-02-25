@@ -1,0 +1,684 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.Forms</name>
+    </assembly>
+    <members>
+        <member name="T:Prism.Navigation.INavigationPageOptions">
+            <summary>
+            Provides a way for the INavigationService to make decisions regarding a NavigationPage during navigation.
+            </summary>
+        </member>
+        <member name="P:Prism.Navigation.INavigationPageOptions.ClearNavigationStackOnNavigation">
+            <summary>
+            The INavigationService uses the result of this property to determine if the NavigationPage should clear the NavigationStack when navigating to a new Page.
+            </summary>
+            <remarks>This is equivalant to calling PopToRoot, and then replacing the current Page with the target Page being navigated to.</remarks>
+        </member>
+        <member name="T:Prism.Navigation.IMasterDetailPageOptions">
+            <summary>
+            Provides a way for the INavigationService to make decisions regarding a MasterDetailPage during navigation.
+            </summary>
+        </member>
+        <member name="P:Prism.Navigation.IMasterDetailPageOptions.IsPresentedAfterNavigation">
+            <summary>
+            The INavigationService uses the result of this property to determine if the MasterDetailPage.Master should be presented after navigation.
+            </summary>
+        </member>
+        <member name="T:Prism.Navigation.IConfirmNavigation">
+            <summary>
+            Provides a way for ViewModels involved in navigation to determine if a navigation request should continue.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.IConfirmNavigation.CanNavigate(Prism.Navigation.NavigationParameters)">
+            <summary>
+            Determines whether this instance accepts being navigated away from.
+            </summary>
+            <param name="parameters">The navigation parameters.</param>
+            <returns><c>True</c> if navigation can continue, <c>False</c> if navigation is not allowed to continue</returns>
+        </member>
+        <member name="T:Prism.Navigation.IConfirmNavigationAsync">
+            <summary>
+            Provides a way for ViewModels involved in navigation to asynchronously determine if a navigation request should continue.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.IConfirmNavigationAsync.CanNavigateAsync(Prism.Navigation.NavigationParameters)">
+            <summary>
+            Determines whether this instance accepts being navigated away from.
+            </summary>
+            <param name="parameters">The navigation parameters.</param>
+            <returns><c>True</c> if navigation can continue, <c>False</c> if navigation is not allowed to continue</returns>
+        </member>
+        <member name="T:Prism.Navigation.INavigationAware">
+            <summary>
+            Provides a way for ViewModels involved in navigation to be notified of navigation activities.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.INavigationAware.OnNavigatedFrom(Prism.Navigation.NavigationParameters)">
+            <summary>
+            Called when the implementer is being navigated away from.
+            </summary>
+            <param name="parameters">The navigation parameters.</param>
+        </member>
+        <member name="M:Prism.Navigation.INavigationAware.OnNavigatedTo(Prism.Navigation.NavigationParameters)">
+            <summary>
+            Called when the implementer has been navigated to.
+            </summary>
+            <param name="parameters">The navigation parameters.</param>
+        </member>
+        <member name="T:Prism.Navigation.INavigationService">
+            <summary>
+            Provides page based navigation for ViewModels.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.INavigationService.GoBackAsync(Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)">
+            <summary>
+            Navigates to the most recent entry in the back navigation history by popping the calling Page off the navigation stack.
+            </summary>
+            <param name="parameters">The navigation parameters</param>
+            <param name="useModalNavigation">If <c>true</c> uses PopModalAsync, if <c>false</c> uses PopAsync</param>
+            <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Prism.Navigation.INavigationService.NavigateAsync(System.Uri,Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)" -->
+        <member name="M:Prism.Navigation.INavigationService.NavigateAsync(System.String,Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)">
+            <summary>
+            Initiates navigation to the target specified by the <paramref name="name"/>.
+            </summary>
+            <param name="name">The name of the target to navigate to.</param>
+            <param name="parameters">The navigation parameters</param>
+            <param name="useModalNavigation">If <c>true</c> uses PopModalAsync, if <c>false</c> uses PopAsync</param>
+            <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
+        </member>
+        <member name="T:Prism.Navigation.NavigationParameters">
+            <summary>
+            Represents Navigation parameters.
+            </summary>
+            <remarks>
+            This class can be used to to pass object parameters during Navigation. 
+            </remarks>
+        </member>
+        <member name="M:Prism.Navigation.NavigationParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Prism.Navigation.NavigationParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.NavigationParameters.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Prism.Navigation.NavigationParameters"/> class with a query string.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Prism.Navigation.NavigationParameters.ToString">
+            <summary>
+            Converts the list of key value pairs to a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Prism.Navigation.PageNavigationService">
+            <summary>
+            Provides page based navigation for ViewModels.
+            </summary>
+        </member>
+        <member name="M:Prism.Navigation.PageNavigationService.GoBackAsync(Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)">
+            <summary>
+            Navigates to the most recent entry in the back navigation history by popping the calling Page off the navigation stack.
+            </summary>
+            <param name="parameters">The navigation parameters</param>
+            <param name="useModalNavigation">If <c>true</c> uses PopModalAsync, if <c>false</c> uses PopAsync</param>
+            <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
+            <returns>If <c>true</c> a go back operation was successful. If <c>false</c> the go back operation failed.</returns>
+        </member>
+        <member name="M:Prism.Navigation.PageNavigationService.NavigateAsync(System.String,Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)">
+            <summary>
+            Initiates navigation to the target specified by the <paramref name="name"/>.
+            </summary>
+            <param name="name">The name of the target to navigate to.</param>
+            <param name="parameters">The navigation parameters</param>
+            <param name="useModalNavigation">If <c>true</c> uses PopModalAsync, if <c>false</c> uses PopAsync</param>
+            <param name="animated">If <c>true</c> the transition is animated, if <c>false</c> there is no animation on transition.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Prism.Navigation.PageNavigationService.NavigateAsync(System.Uri,Prism.Navigation.NavigationParameters,System.Nullable{System.Boolean},System.Boolean)" -->
+        <member name="P:Prism.PrismApplicationBase`1.Container">
+            <summary>
+            The dependency injection container used to resolve objects
+            </summary>
+        </member>
+        <member name="P:Prism.PrismApplicationBase`1.Logger">
+            <summary>
+            Gets the <see cref="T:Prism.Logging.ILoggerFacade"/> for the application.
+            </summary>
+            <value>A <see cref="T:Prism.Logging.ILoggerFacade"/> instance.</value>
+        </member>
+        <member name="P:Prism.PrismApplicationBase`1.ModuleCatalog">
+            <summary>
+            Gets the default <see cref="T:Prism.Modularity.IModuleCatalog"/> for the application.
+            </summary>
+            <value>The default <see cref="T:Prism.Modularity.IModuleCatalog"/> instance.</value>
+        </member>
+        <member name="P:Prism.PrismApplicationBase`1.NavigationService">
+            <summary>
+            Gets the <see cref="T:Prism.Navigation.INavigationService"/> for the application.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.InitializeInternal">
+            <summary>
+            Run the intialization process.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.Initialize">
+            <summary>
+            Run the bootstrapper process.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.CreateLogger">
+            <summary>
+            Create the <see cref="T:Prism.Logging.ILoggerFacade" /> used by the application.
+            </summary>
+            <remarks>
+            The base implementation returns a new TextLogger.
+            </remarks>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.CreateModuleCatalog">
+            <summary>
+            Creates the <see cref="T:Prism.Modularity.IModuleCatalog"/> used by Prism.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.CreateModuleManager">
+            <summary>
+            Creates the <see cref="T:Prism.Modularity.IModuleManager"/> used by Prism.
+            </summary>
+            <returns>The IModuleManager</returns>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.ConfigureModuleCatalog">
+            <summary>
+            Configures the <see cref="T:Prism.Modularity.IModuleCatalog"/> used by Prism.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.InitializeModules">
+            <summary>
+            Initializes the modules.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.CreateContainer">
+            <summary>
+            Creates the container used by Prism.
+            </summary>
+            <returns>The container</returns>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.CreateNavigationService">
+            <summary>
+            Creates the <see cref="T:Prism.Navigation.INavigationService"/> for the application.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.ConfigureViewModelLocator">
+            <summary>
+            Configures the <see cref="T:Prism.Mvvm.ViewModelLocator"/> used by Prism.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.OnInitialized">
+            <summary>
+            Called when the PrismApplication has completed it's initialization process.
+            </summary>
+        </member>
+        <member name="M:Prism.PrismApplicationBase`1.RegisterTypes">
+            <summary>
+            Used to register types with the container that will be used by your application.
+            </summary>
+        </member>
+        <member name="T:Prism.Common.UriParsingHelper">
+            <summary>
+            Helper class for parsing <see cref="T:System.Uri"/> instances.
+            </summary>
+        </member>
+        <member name="T:Prism.Common.IPageAware">
+            <summary>
+            Interface to signify that a class must have knowledge of a specific <see cref="T:Xamarin.Forms.Page"/> instance in order to function properly.
+            </summary>
+        </member>
+        <member name="P:Prism.Common.IPageAware.Page">
+            <summary>
+            The <see cref="T:Xamarin.Forms.Page"/> instance.
+            </summary>
+        </member>
+        <member name="T:Prism.Modularity.IModule">
+            <summary>
+            Defines the contract for the modules deployed in the application.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.IModule.Initialize">
+            <summary>
+            Notifies the module that it has be initialized.
+            </summary>
+        </member>
+        <member name="T:Prism.Modularity.IModuleCatalog">
+            <summary>
+            This is the expected catalog definition for the ModuleManager. 
+            The ModuleCatalog holds information about the modules that can be used by the 
+            application. Each module is described in a ModuleInfo class, that records the 
+            name and type of the module. 
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.IModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Prism.Modularity.ModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.IModuleCatalog.AddModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.ModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.ModuleInfo"/> to add.</param>
+            <returns>The <see cref="T:Prism.Modularity.ModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:Prism.Modularity.IModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="T:Prism.Modularity.IModuleInitializer">
+            <summary>
+            Declares a service which initializes the modules into the application.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.IModuleInitializer.Initialize(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Initializes the specified module.
+            </summary>
+            <param name="moduleInfo">The module to initialize</param>
+        </member>
+        <member name="T:Prism.Modularity.IModuleManager">
+            <summary>
+            Defines the interface for the service that will retrieve and initialize the application's modules.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.IModuleManager.LoadModule(System.String)">
+            <summary>
+            Loads and initializes the module on the <see cref="T:Prism.Modularity.ModuleCatalog"/> with the name <paramref name="moduleName"/>.
+            </summary>
+            <param name="moduleName">Name of the module requested for initialization.</param>
+        </member>
+        <member name="M:Prism.Modularity.IModuleManager.Run">
+            <summary>
+            Initializes the modules in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="T:Prism.Modularity.InitializationMode">
+            <summary>
+            Specifies on which stage the Module group will be initialized.
+            </summary>
+        </member>
+        <member name="F:Prism.Modularity.InitializationMode.WhenAvailable">
+            <summary>
+            The module will be initialized when it is available on application start-up.
+            </summary>
+        </member>
+        <member name="F:Prism.Modularity.InitializationMode.OnDemand">
+            <summary>
+            The module will be initialized when requested, and not automatically on application start-up.
+            </summary>
+        </member>
+        <member name="T:Prism.Modularity.ModuleCatalog">
+            <summary>
+            The <see cref="T:Prism.Modularity.ModuleCatalog"/> holds information about the modules that can be used by the 
+            application. Each module is described in a <see cref="T:Prism.Modularity.ModuleInfo"/> class, that records the 
+            name and type of the module. 
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.ModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Prism.Modularity.ModuleInfo"/> classes that are in the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.ModuleCatalog.AddModule(Prism.Modularity.ModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Prism.Modularity.ModuleInfo"/> to the <see cref="T:Prism.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Prism.Modularity.ModuleInfo"/> to add.</param>
+            <returns>The <see cref="T:Prism.Modularity.ModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:Prism.Modularity.ModuleCatalog.ValidateUniqueModules">
+            <summary>
+            Makes sure all modules have an Unique name. 
+            </summary>
+            <exception cref="T:System.Exception">
+            Thrown if the names of one or more modules are not unique. 
+            </exception>
+        </member>
+        <member name="M:Prism.Modularity.ModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.ModuleInfo.InitializationMode">
+            <summary>
+            Specifies on which stage the Module will be initialized.
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.ModuleInfo.ModuleName">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="P:Prism.Modularity.ModuleInfo.State">
+            <summary>
+            Gets or sets the state of the <see cref="T:Prism.Modularity.ModuleInfo"/> with regards to the module loading and initialization process.
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.ModuleInfo.ModuleType">
+            <summary>
+            Gets or sets the module <see cref="T:System.Type"/>.
+            </summary>
+            <value>The type of the module.</value>
+        </member>
+        <member name="M:Prism.Modularity.ModuleInfo.#ctor">
+            <summary>
+            Initializes a new empty instance of <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.ModuleInfo.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="moduleType">The module's type.</param>
+        </member>
+        <member name="M:Prism.Modularity.ModuleInfo.#ctor(System.String,System.Type)">
+            <summary>
+            Initializes a new instance of <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="moduleName">The module's name.</param>
+            <param name="moduleType">The module's type.</param>
+        </member>
+        <member name="M:Prism.Modularity.ModuleInfo.#ctor(System.String,System.Type,Prism.Modularity.InitializationMode)">
+            <summary>
+            Initializes a new instance of <see cref="T:Prism.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="moduleName">The module's name.</param>
+            <param name="moduleType">The module's type.</param>
+            <param name="initializationMode">The module's <see cref="P:Prism.Modularity.ModuleInfo.InitializationMode"/>.</param>
+        </member>
+        <member name="T:Prism.Modularity.ModuleManager">
+            <summary>
+            Component responsible for coordinating the modules' type loading and module initialization process. 
+            </summary>
+        </member>
+        <member name="P:Prism.Modularity.ModuleManager.ModuleCatalog">
+            <summary>
+            The module catalog.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.ModuleManager.#ctor(Prism.Modularity.IModuleInitializer,Prism.Modularity.IModuleCatalog)">
+            <summary>
+            Initializes an instance of the <see cref="T:Prism.Modularity.ModuleManager"/> class.
+            </summary>
+            <param name="moduleInitializer">Service used for initialization of modules.</param>
+            <param name="moduleCatalog">Catalog that enumerates the modules to be loaded and initialized.</param>
+        </member>
+        <member name="M:Prism.Modularity.ModuleManager.Run">
+            <summary>
+            Initializes the modules marked as <see cref="F:Prism.Modularity.InitializationMode.WhenAvailable"/> in the <see cref="P:Prism.Modularity.ModuleManager.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Modularity.ModuleManager.LoadModule(System.String)">
+            <summary>
+            Loads and initializes the module in the <see cref="P:Prism.Modularity.ModuleManager.ModuleCatalog"/> with the name <paramref name="moduleName"/>.
+            </summary>
+            <param name="moduleName">Name of the module requested for initialization.</param>
+        </member>
+        <member name="T:Prism.Modularity.ModuleState">
+            <summary>
+            Defines the states a <see cref="T:Prism.Modularity.ModuleInfo"/> can be in, with regards to the module loading and initialization process. 
+            </summary>
+        </member>
+        <member name="F:Prism.Modularity.ModuleState.NotStarted">
+            <summary>
+            Initial state for <see cref="T:Prism.Modularity.ModuleInfo"/>s. The <see cref="T:Prism.Modularity.ModuleInfo"/> is defined, 
+            but it has not been loaded, retrieved or initialized yet. 
+            </summary>
+        </member>
+        <member name="F:Prism.Modularity.ModuleState.Initializing">
+            <summary>
+            The module is currently Initializing, by the <see cref="T:Prism.Modularity.IModuleInitializer"/>
+            </summary>
+        </member>
+        <member name="F:Prism.Modularity.ModuleState.Initialized">
+            <summary>
+            The module is initialized and ready to be used. 
+            </summary>
+        </member>
+        <member name="T:Prism.Mvvm.ViewModelLocator">
+            <summary>
+            This class defines the attached property and related change handler that calls the <see cref="T:Prism.Mvvm.ViewModelLocationProvider"/>.
+            </summary>
+        </member>
+        <member name="F:Prism.Mvvm.ViewModelLocator.AutowireViewModelProperty">
+            <summary>
+            Instructs Prism whether or not to automatically create an instance of a ViewModel using a convention, and assign the associated View's <see cref="P:Xamarin.Forms.BindableObject.BindingContext"/> to that instance.
+            </summary>
+        </member>
+        <member name="M:Prism.Mvvm.ViewModelLocator.GetAutowireViewModel(Xamarin.Forms.BindableObject)">
+            <summary>
+            Gets the AutowireViewModel property value.
+            </summary>
+            <param name="bindable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.Mvvm.ViewModelLocator.SetAutowireViewModel(Xamarin.Forms.BindableObject,System.Nullable{System.Boolean})">
+            <summary>
+            Sets the AutowireViewModel property value.  If <c>true</c>, creates an instance of a ViewModel using a convention, and sets the associated View's <see cref="P:Xamarin.Forms.BindableObject.BindingContext"/> to that instance.
+            </summary>
+            <param name="bindable"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Prism.Mvvm.ViewModelLocator.Bind(System.Object,System.Object)">
+            <summary>
+            Sets the <see cref="P:Xamarin.Forms.BindableObject.BindingContext"/> of a View
+            </summary>
+            <param name="view">The View to set the <see cref="P:Xamarin.Forms.BindableObject.BindingContext"/> on</param>
+            <param name="viewModel">The object to use as the <see cref="P:Xamarin.Forms.BindableObject.BindingContext"/> for the View</param>
+        </member>
+        <member name="T:Prism.Services.ActionSheetButton">
+            <summary>
+            Represents a button displayed in <see cref="M:Prism.Services.IPageDialogService.DisplayActionSheetAsync(System.String,Prism.Services.IActionSheetButton[])"/>
+            </summary>
+        </member>
+        <member name="P:Prism.Services.ActionSheetButton.IsDestroy">
+            <summary>
+            The button will be used as destroy
+            </summary>
+        </member>
+        <member name="P:Prism.Services.ActionSheetButton.IsCancel">
+            <summary>
+            The button will be used as cancel
+            </summary>
+        </member>
+        <member name="P:Prism.Services.ActionSheetButton.Text">
+            <summary>
+            Text to display in the action sheet
+            </summary>
+        </member>
+        <member name="P:Prism.Services.ActionSheetButton.Command">
+            <summary>
+            Command to execute when button is pressed
+            </summary>
+        </member>
+        <member name="M:Prism.Services.ActionSheetButton.CreateCancelButton(System.String,System.Windows.Input.ICommand)">
+            <summary>
+            Create a new instance of <see cref="T:Prism.Services.ActionSheetButton"/> that display as "cancel button"
+            </summary>
+            <param name="text">Button text</param>
+            <param name="command">Command to execute when button pressed</param>
+            <returns>An instance of <see cref="T:Prism.Services.ActionSheetButton"/></returns>
+        </member>
+        <member name="M:Prism.Services.ActionSheetButton.CreateDestroyButton(System.String,System.Windows.Input.ICommand)">
+            <summary>
+            Create a new instance of <see cref="T:Prism.Services.ActionSheetButton"/> that display as "destroy button"
+            </summary>
+            <param name="text">Button text</param>
+            <param name="command">Command to execute when button pressed</param>
+            <returns>An instance of <see cref="T:Prism.Services.ActionSheetButton"/></returns>
+        </member>
+        <member name="M:Prism.Services.ActionSheetButton.CreateButton(System.String,System.Windows.Input.ICommand)">
+            <summary>
+            Create a new instance of <see cref="T:Prism.Services.ActionSheetButton"/> that display as "other button"
+            </summary>
+            <param name="text">Button text</param>
+            <param name="command">Command to execute when button pressed</param>
+            <returns>An instance of <see cref="T:Prism.Services.ActionSheetButton"/></returns>
+        </member>
+        <member name="T:Prism.Services.DependencyService">
+            <summary>
+            A service that provides acess to platform-specific implementations of a specified type
+            </summary>
+        </member>
+        <member name="M:Prism.Services.DependencyService.Get``1">
+            <summary>
+            Returns a platform-specific implementation of a type registered with the Xamarin.Forms.DependencyService
+            </summary>
+            <typeparam name="T">The type of class to get</typeparam>
+            <returns>The class instance</returns>
+        </member>
+        <member name="T:Prism.Services.IActionSheetButton">
+            <summary>
+            Convenient contract to enable executing commands directly when using <see cref="M:Prism.Services.IPageDialogService.DisplayActionSheetAsync(System.String,Prism.Services.IActionSheetButton[])"/>
+            </summary>
+        </member>
+        <member name="P:Prism.Services.IActionSheetButton.IsDestroy">
+            <summary>
+            The button will be used as destroy
+            </summary>
+        </member>
+        <member name="P:Prism.Services.IActionSheetButton.IsCancel">
+            <summary>
+            The button will be used as cancel
+            </summary>
+        </member>
+        <member name="P:Prism.Services.IActionSheetButton.Text">
+            <summary>
+            Text to display in the action sheet
+            </summary>
+        </member>
+        <member name="P:Prism.Services.IActionSheetButton.Command">
+            <summary>
+            Command to execute when button is pressed
+            </summary>
+        </member>
+        <member name="T:Prism.Services.IDependencyService">
+            <summary>
+            A service that provides acess to platform-specific implementations of a specified type
+            </summary>
+        </member>
+        <member name="M:Prism.Services.IDependencyService.Get``1">
+            <summary>
+            Returns a platform-specific implementation of a type registered with the Xamarin.Forms.DependencyService
+            </summary>
+            <typeparam name="T">The type of class to get</typeparam>
+            <returns>The class instance</returns>
+        </member>
+        <member name="T:Prism.Services.IPageDialogService">
+            <summary>
+            A service which provides access to the DisplayAlert and DisplayActionSheet off of the Xamarin.Forms.Page class.
+            </summary>
+        </member>
+        <member name="M:Prism.Services.IPageDialogService.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Presents an alert dialog to the application user with an accept and a cancel button.
+            </summary>
+            <para>
+            The <paramref name="message"/> can be empty.
+            </para>
+            <param name="title">Title to display.</param>
+            <param name="message">Message to display.</param>
+            <param name="acceptButton">Text for the accept button.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
+        </member>
+        <member name="M:Prism.Services.IPageDialogService.DisplayAlertAsync(System.String,System.String,System.String)">
+            <summary>
+            Presents an alert dialog to the application user with a single cancel button.
+            </summary>
+            <para>
+            The <paramref name="message"/> can be empty.
+            </para>
+            <param name="title">Title to display.</param>
+            <param name="message">Message to display.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.Services.IPageDialogService.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
+            <summary>
+            Displays a native platform action sheet, allowing the application user to choose from serveral buttons.
+            </summary>
+            <param name="title">Title to display in view.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <param name="destroyButton">Text for the ok button.</param>
+            <param name="otherButtons">Text for other buttons.</param>
+            <returns>Text for the pressed button</returns>
+        </member>
+        <member name="M:Prism.Services.IPageDialogService.DisplayActionSheetAsync(System.String,Prism.Services.IActionSheetButton[])">
+            <summary>
+            Displays a native platform action sheet, allowing the application user to choose from serveral buttons.
+            </summary>
+            <para>
+            The text displayed in the action sheet will be the value for <see cref="P:Prism.Services.IActionSheetButton.Text"/> and when pressed
+            the <see cref="P:Prism.Services.IActionSheetButton.Command"/> will be executed.
+            </para>
+            <param name="title">Text to display in action sheet</param>
+            <param name="buttons">Buttons displayed in action sheet</param>
+            <returns></returns>
+        </member>
+        <member name="T:Prism.Services.PageDialogService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Prism.Services.PageDialogService.DisplayAlertAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Presents an alert dialog to the application user with an accept and a cancel button.
+            </summary>
+            <para>
+            The <paramref name="message"/> can be empty.
+            </para>
+            <param name="title">Title to display.</param>
+            <param name="message">Message to display.</param>
+            <param name="acceptButton">Text for the accept button.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <returns><c>true</c> if non-destructive button pressed; otherwise <c>false</c>/></returns>
+        </member>
+        <member name="M:Prism.Services.PageDialogService.DisplayAlertAsync(System.String,System.String,System.String)">
+            <summary>
+            Presents an alert dialog to the application user with a single cancel button.
+            </summary>
+            <para>
+            The <paramref name="message"/> can be empty.
+            </para>
+            <param name="title">Title to display.</param>
+            <param name="message">Message to display.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.Services.PageDialogService.DisplayActionSheetAsync(System.String,System.String,System.String,System.String[])">
+            <summary>
+            Displays a native platform action sheet, allowing the application user to choose from serveral buttons.
+            </summary>
+            <param name="title">Title to display in view.</param>
+            <param name="cancelButton">Text for the cancel button.</param>
+            <param name="destroyButton">Text for the ok button.</param>
+            <param name="otherButtons">Text for other buttons.</param>
+            <returns>Text for the pressed button</returns>
+        </member>
+        <member name="M:Prism.Services.PageDialogService.DisplayActionSheetAsync(System.String,Prism.Services.IActionSheetButton[])">
+            <summary>
+            Displays a native platform action sheet, allowing the application user to choose from serveral buttons.
+            </summary>
+            <para>
+            The text displayed in the action sheet will be the value for <see cref="P:Prism.Services.IActionSheetButton.Text"/> and when pressed
+            the <see cref="P:Prism.Services.IActionSheetButton.Command"/> will be executed.
+            </para>
+            <param name="title">Text to display in action sheet</param>
+            <param name="buttons">Buttons displayed in action sheet</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

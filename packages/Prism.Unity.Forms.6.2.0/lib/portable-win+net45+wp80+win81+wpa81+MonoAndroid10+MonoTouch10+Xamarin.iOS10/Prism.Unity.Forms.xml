@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.Unity.Forms</name>
+    </assembly>
+    <members>
+        <member name="M:Prism.Unity.Extensions.DependencyServiceStrategy.CallToDependencyService(System.Type)">
+            <summary>
+            This is horrendous, but Xamarin did not provide a non-generic version of the DependencyService.Get method call.
+            </summary>
+            <param name="targetType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation``1(Microsoft.Practices.Unity.IUnityContainer,System.String)">
+            <summary>
+            Registers a Page for navigation.
+            </summary>
+            <typeparam name="TView">The Type of Page to register</typeparam>
+            <param name="container"><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> used to register type for Navigation.</param>
+            <param name="name">The unique name to register with the Page</param>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation(Microsoft.Practices.Unity.IUnityContainer,System.Type,System.String)">
+            <summary>
+            Registers a Page for navigation
+            </summary>
+            <param name="container"><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> used to register type for Navigation.</param>
+            <param name="viewType">The type of Page to register</param>
+            <param name="name">The unique name to register with the Page</param>
+            <returns><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/></returns>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation``2(Microsoft.Practices.Unity.IUnityContainer,System.String)">
+            <summary>
+            Registers a Page for navigation.
+            </summary>
+            <typeparam name="TView">The Type of Page to register</typeparam>
+            <typeparam name="TViewModel">The ViewModel to use as the BindingContext for the Page</typeparam>
+            <param name="name">The unique name to register with the Page</param>
+            <param name="container"></param>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigationOnPlatform``2(Microsoft.Practices.Unity.IUnityContainer,System.String,System.Type,System.Type,System.Type,System.Type,System.Type)">
+            <summary>
+            Registers a Page for navigation based on the current Device OS using a shared ViewModel
+            </summary>
+            <typeparam name="TView">Default View Type to be shared across multiple Device Operating Systems if they are not specified directly.</typeparam>
+            <typeparam name="TViewModel">Shared ViewModel Type</typeparam>
+            <param name="container"><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> used to register type for Navigation.</param>
+            <param name="name">The unique name to register with the Page. If left empty or null will default to the ViewModel root name. i.e. MyPageViewModel => MyPage</param>
+            <param name="androidView">Android Specific View Type</param>
+            <param name="iOSView">iOS Specific View Type</param>
+            <param name="otherView">Other Platform Specific View Type</param>
+            <param name="windowsView">Windows Specific View Type</param>
+            <param name="winPhoneView">Windows Phone Specific View Type</param>
+            <returns><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/></returns>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigationOnIdiom``2(Microsoft.Practices.Unity.IUnityContainer,System.String,System.Type,System.Type,System.Type)">
+            <summary>
+            Registers a Page for navigation based on the Device Idiom using a shared ViewModel
+            </summary>
+            <typeparam name="TView">Default View Type to be used across multiple Idioms if they are not specified directly.</typeparam>
+            <typeparam name="TViewModel">The shared ViewModel</typeparam>
+            <param name="container"><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> used to register type for Navigation.</param>
+            <param name="name">The common name used for Navigation. If left empty or null will default to the ViewModel root name. i.e. MyPageViewModel => MyPage</param>
+            <param name="desktopView">Desktop Specific View Type</param>
+            <param name="tabletView">Tablet Specific View Type</param>
+            <param name="phoneView">Phone Specific View Type</param>
+            <returns><see cref="T:Microsoft.Practices.Unity.IUnityContainer"/></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:validation="clr-namespace:UsingValidation.Validation"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="UsingValidation.Views.MainPage"
+             Title="MainPage">  
+  <Grid VerticalOptions="Center">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="10" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="10" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40" />
+      <RowDefinition Height="5" />
+      <RowDefinition Height="40" />
+      <RowDefinition Height="10" />
+      <RowDefinition Height="100" />
+      <RowDefinition Height="10" />
+      <RowDefinition Height="40" />
+    </Grid.RowDefinitions>
+    
+    <Label Text ="Name: " VerticalTextAlignment="Center" Grid.Column="1" />   
+    <Entry Text="{Binding DemoItem.Name, Mode=TwoWay}" Grid.Column="2" HorizontalOptions="FillAndExpand">      
+      <Entry.Style>
+        <Style TargetType="Entry">
+          <Style.Setters>
+            <Setter Property="validation:EntryValidationBehavior.AttachBehavior" Value="true" />
+            <Setter Property="validation:EntryValidationBehavior.Source" Value="{Binding DemoItem}" />
+          </Style.Setters>
+        </Style>
+      </Entry.Style>
+    </Entry>
+
+    <Label Text ="Description: " VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2" />
+    <Entry Text="{Binding DemoItem.Description, Mode=TwoWay}" Grid.Column="2" HorizontalOptions="FillAndExpand" Grid.Row="2">
+      <Entry.Style>
+        <Style TargetType="Entry">
+          <Style.Setters>
+            <Setter Property="validation:EntryValidationBehavior.AttachBehavior" Value="true" />
+            <Setter Property="validation:EntryValidationBehavior.Source" Value="{Binding DemoItem}" />
+          </Style.Setters>
+        </Style>
+      </Entry.Style>
+    </Entry>
+
+    <ListView ItemsSource="{Binding DemoItem.ErrorsList}" 
+              Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" />
+
+    <Button Text="Submit" IsEnabled="{Binding DemoItem.IsSubmitEnabled}" 
+            Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" />
+  </Grid>
+</ContentPage>
