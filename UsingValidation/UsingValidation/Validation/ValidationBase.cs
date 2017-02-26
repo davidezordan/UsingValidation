@@ -84,15 +84,15 @@ namespace UsingValidation.Validation
 
         private void HandleValidationResults(List<ValidationResult> validationResults)
         {
-            var resultsByPropNames = from res in validationResults
-                                     from mname in res.MemberNames
-                                     group res by mname into g
-                                     select g;
-
-            foreach (var prop in resultsByPropNames)
+            var resultsByPropertyName = from results in validationResults
+                                     	from memberNames in results.MemberNames
+                                     	group results by memberNames into groups
+                                     	select groups;
+				
+            foreach (var property in resultsByPropertyName)
             {
-                _errors.Add(prop.Key, prop.Select(r => r.ErrorMessage).ToList());
-                RaiseErrorsChanged(prop.Key);
+                _errors.Add(property.Key, property.Select(r => r.ErrorMessage).ToList());
+                RaiseErrorsChanged(property.Key);
             }
         }
 
