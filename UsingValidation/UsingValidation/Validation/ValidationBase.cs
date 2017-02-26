@@ -11,7 +11,6 @@ namespace UsingValidation.Validation
 {
     public class ValidationBase : BindableBase, INotifyDataErrorInfo
     {
-        private object _lock = new Object();
         private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
         public ValidationBase()
@@ -31,23 +30,28 @@ namespace UsingValidation.Validation
 
         public IEnumerable GetErrors(string propertyName)
         {
-            if (!string.IsNullOrEmpty(propertyName))
-            {
-                if (_errors.ContainsKey(propertyName) && (_errors[propertyName] != null) &&
-                    _errors[propertyName].Count > 0)
-                    return _errors[propertyName].ToList();
-                else
-                    return null;
-            }
-            else
-                return _errors.SelectMany(err => err.Value.ToList());
+			if (!string.IsNullOrEmpty(propertyName))
+			{
+				if (_errors.ContainsKey(propertyName) && (_errors[propertyName].Any()))
+				{
+					return _errors[propertyName];
+				}
+				else
+				{
+					return null;
+				}
+			}
+			else
+			{
+				return _errors.SelectMany(err => err.Value.ToList());
+			}
         }
 
         public bool HasErrors
         {
             get
             {
-                return _errors.Any(propErrors => propErrors.Value != null && propErrors.Value.Count > 0);
+				return _errors.Any(propErrors => propErrors.Value.Any());
             }
         }
 
@@ -63,14 +67,20 @@ namespace UsingValidation.Validation
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateProperty(value, validationContext, validationResults);
 
-            if (_errors.ContainsKey(propertyName))
-            {
-                _errors.Remove(propertyName);
-            }
+			RemoveErrorsByPropertyName(propertyName);
 
-            RaiseErrorsChanged(propertyName);
             HandleValidationResults(validationResults);
         }
+
+		private void RemoveErrorsByPropertyName(string propertyName)
+		{
+			if (_errors.ContainsKey(propertyName))
+			{
+				_errors.Remove(propertyName);
+			}
+
+			RaiseErrorsChanged(propertyName);
+		}
 
         private void HandleValidationResults(List<ValidationResult> validationResults)
         {
@@ -81,8 +91,7 @@ namespace UsingValidation.Validation
 
             foreach (var prop in resultsByPropNames)
             {
-                var messages = prop.Select(r => r.ErrorMessage).ToList();
-                _errors.Add(prop.Key, messages);
+                _errors.Add(prop.Key, prop.Select(r => r.ErrorMessage).ToList());
                 RaiseErrorsChanged(prop.Key);
             }
         }
@@ -96,11 +105,7 @@ namespace UsingValidation.Validation
         {
             get
             {
-                if (_errors != null && _errors.Count > 0)
-                {
-                    return _errors.Select(kp => kp.Value).First();
-                }
-                return null;
+				return GetErrors(string.Empty).Cast<string>().ToList();
             }
         }
     }
