@@ -29,20 +29,6 @@ namespace UsingValidation.Validation
             {
                 return;
             }
-
-            bool attachBehavior = (bool)newValue;
-            if (attachBehavior)
-            {
-                entry.Behaviors.Add(new EntryValidationBehavior());
-            }
-            else
-            {
-                var toRemove = entry.Behaviors.FirstOrDefault(b => b is EntryValidationBehavior);
-                if (toRemove != null)
-                {
-                    entry.Behaviors.Remove(toRemove);
-                }
-            }
         }
 
         #endregion
@@ -68,43 +54,6 @@ namespace UsingValidation.Validation
             if (entry == null)
             {
                 return;
-            }
-
-            //var oldValidationObject = newValue as ValidationBase;
-            //if (oldValidationObject != null)
-            //{
-            //    oldValidationObject.ErrorsChanged -= ValidationObject_ErrorsChanged;
-            //}
-
-            //var validationObject = newValue as ValidationBase;
-            //if (validationObject != null)
-            //{
-            //    validationObject.ErrorsChanged += ValidationObject_ErrorsChanged;
-            //}
-        }
-
-        private static void ValidationObject_ErrorsChanged(object sender, System.ComponentModel.DataErrorsChangedEventArgs e)
-        {
-            var prop = e.PropertyName;
-
-            var validationObject = (sender as ValidationBase);
-            if (validationObject != null)
-            {
-                if (validationObject.HasErrors)
-                {
-                    //AssociatedObject.BackgroundColor = Color.Red;
-                    var errors = validationObject.GetErrors(prop);
-                    var message = errors?.Cast<string>()?.FirstOrDefault();
-                    if (message != null)
-                    {
-                        //AssociatedObject.Placeholder = message;
-                    }
-                }
-                else
-                {
-                    //AssociatedObject.Placeholder = string.Empty;
-                    //AssociatedObject.BackgroundColor = Color.Default;
-                }
             }
         }
 
