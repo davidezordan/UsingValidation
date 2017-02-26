@@ -24,27 +24,19 @@
     </Grid.RowDefinitions>
     
     <Label Text ="Name: " VerticalTextAlignment="Center" Grid.Column="1" />   
-    <Entry Text="{Binding DemoItem.Name, Mode=TwoWay}" Grid.Column="2" HorizontalOptions="FillAndExpand">      
-      <Entry.Style>
-        <Style TargetType="Entry">
-          <Style.Setters>
-            <Setter Property="validation:EntryValidationBehavior.AttachBehavior" Value="true" />
-            <Setter Property="validation:EntryValidationBehavior.Source" Value="{Binding DemoItem}" />
-          </Style.Setters>
-        </Style>
-      </Entry.Style>
+    <Entry Text="{Binding Name, Mode=TwoWay}" BindingContext="{Binding DemoItem}"
+	 	   Grid.Column="2" HorizontalOptions="FillAndExpand">
+		<Entry.Behaviors>
+			<validation:EntryValidationBehavior PropertyName="Name" />	
+		</Entry.Behaviors>
     </Entry>
 
     <Label Text ="Description: " VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2" />
-    <Entry Text="{Binding DemoItem.Description, Mode=TwoWay}" Grid.Column="2" HorizontalOptions="FillAndExpand" Grid.Row="2">
-      <Entry.Style>
-        <Style TargetType="Entry">
-          <Style.Setters>
-            <Setter Property="validation:EntryValidationBehavior.AttachBehavior" Value="true" />
-            <Setter Property="validation:EntryValidationBehavior.Source" Value="{Binding DemoItem}" />
-          </Style.Setters>
-        </Style>
-      </Entry.Style>
+    <Entry Text="{Binding Description, Mode=TwoWay}" BindingContext="{Binding DemoItem}"
+	 	   Grid.Column="2" HorizontalOptions="FillAndExpand" Grid.Row="2">
+		<Entry.Behaviors>
+			<validation:EntryValidationBehavior PropertyName="Description" />	
+		</Entry.Behaviors>
     </Entry>
 
     <ListView ItemsSource="{Binding DemoItem.ErrorsList}" 

@@ -28,7 +28,7 @@ namespace UsingValidation.Models
         }
 
         [Required(ErrorMessage = "Description cannot be empty!")]
-        [RegularExpression(@"\w{9,}", ErrorMessage = "Description should contain more than 9 characters")]
+        [RegularExpression(@"\w{5,}", ErrorMessage = "Description: more than 4 characters required")]
         public string Description
         {
             get { return _description; }

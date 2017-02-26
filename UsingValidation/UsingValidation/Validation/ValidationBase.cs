@@ -34,16 +34,16 @@ namespace UsingValidation.Validation
 			{
 				if (_errors.ContainsKey(propertyName) && (_errors[propertyName].Any()))
 				{
-					return _errors[propertyName];
+					return _errors[propertyName].ToList();
 				}
 				else
 				{
-					return null;
+					return new List<string>();
 				}
 			}
 			else
 			{
-				return _errors.SelectMany(err => err.Value.ToList());
+				return _errors.SelectMany(err => err.Value.ToList()).ToList();
 			}
         }
 
