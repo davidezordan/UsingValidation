@@ -5,7 +5,7 @@ using UsingValidation.Validation;
 
 namespace UsingValidation.Models
 {
-    public class Item : ValidationBase, INotifyDataErrorInfo
+    public class Item : ValidationBase
     {
         public Item()
         {
@@ -28,7 +28,7 @@ namespace UsingValidation.Models
         }
 
         [Required(ErrorMessage = "Description cannot be empty!")]
-        [RegularExpression(@"\w{5,}", ErrorMessage = "Description: more than 4 characters required")]
+        [RegularExpression(@"\w{5,}", ErrorMessage = "Description: more than 4 letters/numbers required")]
         public string Description
         {
             get { return _description; }
