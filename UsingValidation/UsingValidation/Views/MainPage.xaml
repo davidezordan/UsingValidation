@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:validation="clr-namespace:UsingValidation.Validation"
+             xmlns:effects="clr-namespace:UsingValidation.Effects"             
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="UsingValidation.Views.MainPage"
              Title="MainPage">  
@@ -34,9 +35,12 @@
     <Label Text ="Description: " VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="2" />
     <Entry Text="{Binding Description, Mode=TwoWay}" BindingContext="{Binding DemoItem}"
 	 	   Grid.Column="2" HorizontalOptions="FillAndExpand" Grid.Row="2">
-		<Entry.Behaviors>
-			<validation:EntryValidationBehavior PropertyName="Description" />	
-		</Entry.Behaviors>
+    <!--<Entry.Effects>
+        <effects:BorderEffect />	        
+    </Entry.Effects>-->
+	<Entry.Behaviors>
+		<validation:EntryValidationBehavior PropertyName="Description" />	
+	</Entry.Behaviors>
     </Entry>
 
     <ListView ItemsSource="{Binding DemoItem.ErrorsList}" 

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UsingValidation.Effects;
 using Xamarin.Forms;
 
 namespace UsingValidation.Validation
@@ -25,12 +26,24 @@ namespace UsingValidation.Validation
 				var errors = source.GetErrors(PropertyName).Cast<string>();
 				if (errors != null && errors.Any())
 				{
-					_associatedObject.BackgroundColor = Color.Red;
-				}
-				else
+                    var borderEffect = _associatedObject.Effects.FirstOrDefault(eff => eff is BorderEffect);
+                    if (borderEffect == null)
+                    {
+                        _associatedObject.Effects.Add(new BorderEffect());
+                    }
+
+                    //_associatedObject.BackgroundColor = Color.Red;
+                }
+                else
 				{
-					_associatedObject.BackgroundColor = Color.Default;
-				}
+                    var borderEffect = _associatedObject.Effects.FirstOrDefault(eff => eff is BorderEffect);
+                    if (borderEffect != null)
+                    {
+                        _associatedObject.Effects.Remove(borderEffect);
+                    }
+
+                    //_associatedObject.BackgroundColor = Color.Default;
+                }
 			}
 		}
 
