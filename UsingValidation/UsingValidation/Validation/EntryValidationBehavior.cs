@@ -58,7 +58,7 @@ namespace UsingValidation.Validation
             base.OnDetachingFrom(bindable);
             // Perform clean up
 
-			_associatedObject.TextChanged += _associatedObject_TextChanged;
+			_associatedObject.TextChanged -= _associatedObject_TextChanged;
 
             _associatedObject = null;
         }
