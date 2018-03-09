@@ -1,8 +1,5 @@
 # UsingValidation
 Xamarin.Forms validation sample using INotifyDataErrorInfo
 
-// This code is licensed under the MIT License (MIT). <br />
-// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF <br />
-// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY <br />
-// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR <br />
-// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT. <br />
+Reference code for:<br/ >
+Validate input in Xamarin.Forms using INotifyDataErrorInfo, custom Behaviors, Effects and Prism - https://www.davidezordan.net/blog/?p=8093
