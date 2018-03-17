@@ -31,11 +31,6 @@ namespace UsingValidation.Validation
                     {
                         _associatedObject.Effects.Add(new BorderEffect());
                     }
-
-                    if (Device.OS != TargetPlatform.Windows)
-                    {
-                        _associatedObject.BackgroundColor = Color.Red;
-                    }
                 }
                 else
 				{
@@ -43,11 +38,6 @@ namespace UsingValidation.Validation
                     if (borderEffect != null)
                     {
                         _associatedObject.Effects.Remove(borderEffect);
-                    }
-
-                    if (Device.OS != TargetPlatform.Windows)
-                    {
-                        _associatedObject.BackgroundColor = Color.Default;
                     }
                 }
 			}
