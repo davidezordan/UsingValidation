@@ -39,7 +39,7 @@ In these cases, we could take advantage of other types available to make our cod
 </ul>
 To start exploring this approach, I created a new Xamarin.Forms Prism solution using the <a href="https://marketplace.visualstudio.com/items?itemName=BrianLagunas.PrismTemplatePack" target="_blank">Prism Template Pack</a> which generated the following project structure:
 
-<img class="size-medium wp-image-8095 aligncenter" src="../wp-content/uploads/2017/03/Capture-1-300x150.png" alt="" width="300" height="150" />
+<img class="size-medium wp-image-8095 aligncenter" src="https://davide.dev/wp-content/uploads/2017/03/Capture-1-300x150.png" alt="" width="300" height="150" />
 
 Then, I added the following new model to be validated using <strong>DataAnnotations</strong> and <strong>INotifyDataErrorInfo</strong>:
 <pre title="DataAnntotations" class="lang:default decode:true ">using System.ComponentModel.DataAnnotations;
@@ -100,7 +100,7 @@ namespace UsingValidation.Models
 }</pre>
 The model uses attributes declared in the <strong>SystemComponentModel.DataAnnotations</strong> namespace which can be referenced in the solution modifying the Portable Class Library profile of the <strong>UsingValidation</strong> common project:
 
-<img class="size-medium wp-image-8096 aligncenter" src="../wp-content/uploads/2017/03/Capture-2-300x279.png" alt="" width="300" height="279" />
+<img class="size-medium wp-image-8096 aligncenter" src="https://davide.dev/wp-content/uploads/2017/03/Capture-2-300x279.png" alt="" width="300" height="279" />
 
 Quick tip: to be able to change the PCL profile I had to remove all the NuGet packages used by the common project, remove the Windows Phone 8 profile and then add back all the removed NuGet packages to the <strong>UsingValidation</strong> PCL.
 
@@ -348,9 +348,9 @@ namespace UsingValidation.UWP.Effects
 }</pre>
 And this is the result when the application is executed on Android and UWP:
 
-<img class="size-medium wp-image-8097 aligncenter" src="../wp-content/uploads/2017/03/Capture-3-169x300.png" alt="" width="169" height="300" />
+<img class="size-medium wp-image-8097 aligncenter" src="https://davide.dev/wp-content/uploads/2017/03/Capture-3-169x300.png" alt="" width="169" height="300" />
 
-<img class="size-medium wp-image-8098 aligncenter" src="../wp-content/uploads/2017/03/Capture-5-300x233.png" alt="" width="300" height="233" />
+<img class="size-medium wp-image-8098 aligncenter" src="https://davide.dev/wp-content/uploads/2017/03/Capture-5-300x233.png" alt="" width="300" height="233" />
 
 <strong>Conclusions</strong>
 
