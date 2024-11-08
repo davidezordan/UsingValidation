@@ -100,7 +100,7 @@ namespace UsingValidation.Models
 }</pre>
 The model uses attributes declared in the <strong>SystemComponentModel.DataAnnotations</strong> namespace which can be referenced in the solution modifying the Portable Class Library profile of the <strong>UsingValidation</strong> common project:
 
-<img class="size-medium wp-image-8096 aligncenter" src="https://davide.dev/wp-content/uploads/2017/03/Capture-2-300x279.png" alt="" width="300" height="279" />
+<img class="size-medium wp-image-8096 aligncenter" src="https://davidezordan.github.io/wp-content/uploads/2017/03/Capture-2-300x279.png" alt="" width="300" height="279" />
 
 Quick tip: to be able to change the PCL profile I had to remove all the NuGet packages used by the common project, remove the Windows Phone 8 profile and then add back all the removed NuGet packages to the <strong>UsingValidation</strong> PCL.
 
